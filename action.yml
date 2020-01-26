@@ -1,0 +1,43 @@
+name: 'Netlify Deploy'
+author: 'Jo Colina'
+description: 'Netlify Deploy'
+
+inputs:
+  NETLIFY_AUTH_TOKEN:
+    description: 'Auth token to use with netlify'
+    required: true
+    default: ''
+
+  NETLIFY_SITE_ID:
+    description: 'Your Netlify site id'
+    required: true
+    default: ''
+
+  NETLIFY_DEPLOY_MESSAGE:
+    description: 'A deploy message'
+    required: false
+    default: ''
+
+  build_directory:
+    description: 'Directory where built files are stored'
+    required: true
+    default: 'build'
+
+  functions_directory:
+    description: 'Directory where built files are stored'
+    required: false
+    default: ''
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.NETLIFY_AUTH_TOKEN }}
+    - ${{ inputs.NETLIFY_SITE_ID }}
+    - ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
+    - ${{ inputs.build_directory }}
+    - ${{ inputs.functions_directory }}
+
+branding:
+  icon: activity
+  color: blue
