@@ -12,6 +12,11 @@ inputs:
     description: 'Your Netlify site id'
     required: true
     default: ''
+    
+  NETLIFY_DEPLOY_TO_PROD:
+    description: 'Should the site be deployed to production?'
+    required: false
+    default: false
 
   NETLIFY_DEPLOY_MESSAGE:
     description: 'A deploy message'
