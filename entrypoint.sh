@@ -19,9 +19,9 @@ export NETLIFY_SITE_ID=$NETLIFY_SITE_ID
 export NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN
 
 # Deploy with netlify
-if [ -z $NETLIFY_DEPLOY_TO_PROD ]
+if [[ $NETLIFY_DEPLOY_TO_PROD == "true" ]]
 then
-	netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message="$INPUT_NETLIFY_DEPLOY_MESSAGE"
-else
 	netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --prod --message="$INPUT_NETLIFY_DEPLOY_MESSAGE"
+else
+	netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message="$INPUT_NETLIFY_DEPLOY_MESSAGE"
 fi
