@@ -19,7 +19,7 @@ jobs:
   deploy:
     name: 'Deploy to Netlify'
     steps:
-      - uses: jsmrcaga/action-netlify-deploy@v1
+      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
         	NETLIFY_AUTH_TOKEN: ${{ secrets.MY_TOKEN_SECRET }}
         	NETLIFY_DEPLOY_TO_PROD: true
