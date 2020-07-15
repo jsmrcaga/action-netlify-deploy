@@ -3,10 +3,9 @@
 This is a simple GitHub Action to deploy a static website to Netlify.
 
 ## Usage
-To use a GitHub action you can just reference it on your Workflow file 
-(for more info check [this article by Github](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow))
 
-> Important: this action will execute `npm i` and `npm run build`. Please open an issue if another command is needed
+To use a GitHub action you can just reference it on your Workflow file
+(for more info check [this article by Github](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow))
 
 ```yml
 name: 'My Workflow'
@@ -21,8 +20,8 @@ jobs:
     steps:
       - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
-        	NETLIFY_AUTH_TOKEN: ${{ secrets.MY_TOKEN_SECRET }}
-        	NETLIFY_DEPLOY_TO_PROD: true
+          NETLIFY_AUTH_TOKEN: ${{ secrets.MY_TOKEN_SECRET }}
+          NETLIFY_DEPLOY_TO_PROD: true
 ```
 
 ### Inputs
@@ -35,12 +34,15 @@ The inputs this action uses are:
 | Name | Required | Default | Description |
 |:----:|:--------:|:-------:|:-----------:|
 | `NETLIFY_AUTH_TOKEN` | `true` | N/A | The token needed to deploy your site ([generate here](https://app.netlify.com/user/applications#personal-access-tokens))|
-| `NETLIFY_SITE_ID` | `true` | N/A | The site to where deploy your site (get it from the API ID on your Site Settings) | 
-| `NETLIFY_DEPLOY_MESSAGE` | `false` | '' | An optional deploy message | 
+| `NETLIFY_SITE_ID` | `true` | N/A | The site to where deploy your site (get it from the API ID on your Site Settings) |
+| `NETLIFY_DEPLOY_MESSAGE` | `false` | '' | An optional deploy message |
 | `build_directory` | `false` | `'build'` | The directory where your files are built |
 | `functions_directory` | `false` | N/A | The (optional) directory where your Netlify functions are stored |
+| `install_command` | `false` | `npm i` | The (optional) command to install dependencies |
+| `build_command` | `false` | `npm run build` | The (optional) command to build static website |
 
 ## Example
+
 ### Deploy to production on release
 
 > You can setup repo secrets to use in your workflows
@@ -68,6 +70,7 @@ jobs:
 ```
 
 ### Preview Deploy on pull request
+
 ```yml
 name: 'Netlify Preview Deploy'
 
