@@ -12,7 +12,7 @@ inputs:
     description: 'Your Netlify site id'
     required: true
     default: ''
-    
+
   NETLIFY_DEPLOY_TO_PROD:
     description: 'Should the site be deployed to production?'
     required: false
@@ -33,6 +33,16 @@ inputs:
     required: false
     default: ''
 
+  install_command:
+    description: 'Command to install dependencies'
+    required: false
+    default: 'npm i'
+
+  build_command:
+    description: 'Command to build static website'
+    required: false
+    default: 'npm run build'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -42,6 +52,8 @@ runs:
     - ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
     - ${{ inputs.build_directory }}
     - ${{ inputs.functions_directory }}
+    - ${{ inputs.install_command }}
+    - ${{ inputs.build_command }}
 
 branding:
   icon: activity

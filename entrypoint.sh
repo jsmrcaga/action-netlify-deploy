@@ -7,12 +7,14 @@ NETLIFY_SITE_ID=$2
 NETLIFY_DEPLOY_TO_PROD=$3
 BUILD_DIRECTORY=$4
 FUNCTIONS_DIRECTORY=$5
+INSTALL_COMMAND=$6
+BUILD_COMMAND=$7
 
 # Install dependencies
-npm i
+eval ${INSTALL_COMMAND:-"npm i"}
 
 # Build project
-npm run build
+eval ${BUILD_COMMAND:-"npm run build"}
 
 # Export token to use with netlify's cli
 export NETLIFY_SITE_ID=$NETLIFY_SITE_ID
