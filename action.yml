@@ -43,6 +43,11 @@ inputs:
     required: false
     default: 'npm run build'
 
+  base_directory:
+    description: 'The directory where the commands will be executed'
+    required: false
+    default: ''
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -54,6 +59,7 @@ runs:
     - ${{ inputs.functions_directory }}
     - ${{ inputs.install_command }}
     - ${{ inputs.build_command }}
+    - ${{ inputs.base_directory }}
 
 branding:
   icon: activity
