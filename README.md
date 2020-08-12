@@ -31,15 +31,16 @@ your workflow file.
 
 The inputs this action uses are:
 
-| Name | Required | Default | Description |
-|:----:|:--------:|:-------:|:-----------:|
-| `NETLIFY_AUTH_TOKEN` | `true` | N/A | The token needed to deploy your site ([generate here](https://app.netlify.com/user/applications#personal-access-tokens))|
-| `NETLIFY_SITE_ID` | `true` | N/A | The site to where deploy your site (get it from the API ID on your Site Settings) |
-| `NETLIFY_DEPLOY_MESSAGE` | `false` | '' | An optional deploy message |
-| `build_directory` | `false` | `'build'` | The directory where your files are built |
-| `functions_directory` | `false` | N/A | The (optional) directory where your Netlify functions are stored |
-| `install_command` | `false` | `npm i` | The (optional) command to install dependencies |
-| `build_command` | `false` | `npm run build` | The (optional) command to build static website |
+|           Name           | Required |     Default     |                                                       Description                                                        |
+| :----------------------: | :------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------: |
+|   `NETLIFY_AUTH_TOKEN`   |  `true`  |       N/A       | The token needed to deploy your site ([generate here](https://app.netlify.com/user/applications#personal-access-tokens)) |
+|    `NETLIFY_SITE_ID`     |  `true`  |       N/A       |                    The site to where deploy your site (get it from the API ID on your Site Settings)                     |
+| `NETLIFY_DEPLOY_MESSAGE` | `false`  |       ''        |                                                An optional deploy message                                                |
+|    `build_directory`     | `false`  |    `'build'`    |                                         The directory where your files are built                                         |
+|  `functions_directory`   | `false`  |       N/A       |                             The (optional) directory where your Netlify functions are stored                             |
+|    `install_command`     | `false`  |     `npm i`     |                                      The (optional) command to install dependencies                                      |
+|     `build_command`      | `false`  | `npm run build` |                                      The (optional) command to build static website                                      |
+|     `base_directory`     | `false`  |       ''        |                                    The directory where the commands will be executed                                     |
 
 ## Example
 
@@ -65,7 +66,7 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
+          NETLIFY_DEPLOY_MESSAGE: 'Prod deploy v${{ github.ref }}'
           NETLIFY_DEPLOY_TO_PROD: true
 ```
 
@@ -89,5 +90,4 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
 ```

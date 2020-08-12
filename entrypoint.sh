@@ -9,6 +9,13 @@ BUILD_DIRECTORY=$4
 FUNCTIONS_DIRECTORY=$5
 INSTALL_COMMAND=$6
 BUILD_COMMAND=$7
+BASE_DIRECTORY=$8
+
+# Navigate to the base directory if one has been specified
+if [[ $BASE_DIRECTORY ]]
+then
+	cd $BASE_DIRECTORY
+fi
 
 # Install dependencies
 eval ${INSTALL_COMMAND:-"npm i"}
@@ -26,4 +33,10 @@ then
 	netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --prod --message="$INPUT_NETLIFY_DEPLOY_MESSAGE"
 else
 	netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message="$INPUT_NETLIFY_DEPLOY_MESSAGE"
+fi
+
+# Navigate back to the original directory if a base directory has been specified
+if [[ $BASE_DIRECTORY ]]
+then
+	cd -
 fi
