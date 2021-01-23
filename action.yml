@@ -42,6 +42,11 @@ inputs:
     description: 'Command to build static website'
     required: false
     default: 'npm run build'
+  
+  deploy_alias:
+    description: 'Deployment Subdomain name'
+    required: false
+    default: ''
 
 runs:
   using: 'docker'
@@ -54,6 +59,7 @@ runs:
     - ${{ inputs.functions_directory }}
     - ${{ inputs.install_command }}
     - ${{ inputs.build_command }}
+    - ${{ inputs.deploy_alias }}
 
 branding:
   icon: activity

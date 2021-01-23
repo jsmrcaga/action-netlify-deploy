@@ -40,6 +40,7 @@ The inputs this action uses are:
 | `functions_directory` | `false` | N/A | The (optional) directory where your Netlify functions are stored |
 | `install_command` | `false` | `npm i` | The (optional) command to install dependencies |
 | `build_command` | `false` | `npm run build` | The (optional) command to build static website |
+| `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
 
 ## Example
 
@@ -90,4 +91,30 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
+```
+
+### Use branch name to deploy
+
+Will deploy under `https://${branchName}.${siteName}.netlify.app`
+
+```yml
+name: 'Netlify Deploy'
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  deploy:
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: jsmrcaga/action-netlify-deploy@master
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          deploy_alias: ${{ GITHUB_REF##*/ }}
 ```
