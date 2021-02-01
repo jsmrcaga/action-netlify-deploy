@@ -30,7 +30,7 @@ fi
 
 if [[ -n $DEPLOY_ALIAS ]]
 then
-	COMMAND+=" --alias $COMMAND"
+	COMMAND+=" --alias $DEPLOY_ALIAS"
 fi
 
 # Deploy with netlify
