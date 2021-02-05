@@ -95,15 +95,19 @@ jobs:
 
 ### Use branch name to deploy
 
-Will deploy under `https://${branchName}.${siteName}.netlify.app`
+Will deploy branches as `https://${branchName}--${siteName}.netlify.app`.
+
+An action is used to extract the branch name to avoid fiddling with `refs/`. Finally, a commit status check is added, linking to the deployed site.
+
+Only the default branch is built for simplicity. Use a similar workflow or standard Netlify integration for the production deployment.
 
 ```yml
-name: 'Netlify Deploy'
+name: 'Netlify Previews'
 
 on:
   push:
-    branches:
-      - '*'
+    branches-ignore: 
+      - master
 
 jobs:
   deploy:
@@ -112,9 +116,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+
+      # Sets the branch name as environment variable
+      - uses: nelonoel/branch-name@v1.0.1
       - uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          deploy_alias: ${{ GITHUB_REF##*/ }}
+          deploy_alias: ${{ env.BRANCH_NAME }}
+      
+      # Creates a status check with link to preview
+      - name: Status check
+        uses: Sibz/github-status-action@v1.1.1
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: Netlify preview
+          state: success
+          target_url: https://${{ env.BRANCH_NAME }}--my-site.netlify.app
 ```
