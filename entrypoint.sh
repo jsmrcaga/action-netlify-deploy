@@ -26,9 +26,7 @@ COMMAND="netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY 
 if [[ $NETLIFY_DEPLOY_TO_PROD == "true" ]]
 then
 	COMMAND+=" --prod"
-fi
-
-if [[ -n $DEPLOY_ALIAS ]]
+elif [[ -n $DEPLOY_ALIAS ]]
 then
 	COMMAND+=" --alias $DEPLOY_ALIAS"
 fi
