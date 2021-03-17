@@ -36,7 +36,7 @@ inputs:
   install_command:
     description: 'Command to install dependencies'
     required: false
-    default: 'npm i'
+    default: ''
 
   build_command:
     description: 'Command to build static website'
