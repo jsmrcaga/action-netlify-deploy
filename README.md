@@ -134,3 +134,9 @@ jobs:
           state: success
           target_url: https://${{ env.BRANCH_NAME }}--my-site.netlify.app
 ```
+
+### Selecting node version
+
+By default, the latest node will be installed before buidling the application.
+
+To select a different release, create an `.nvmrc` file with the desired version range.
