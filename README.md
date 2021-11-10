@@ -143,3 +143,7 @@ By default, the latest node will be installed before building the application.
 Use the `node_version` input to change the desired version. It will be passed to [`nvm install`](https://github.com/nvm-sh/nvm#usage). Valid examples include `16.3.0`, `14`, or `--lts`.
 
 Alternatively, create an `.nvmrc` file with the desired version range in your repository.
+
+## Contributors
+
+- [tpluscode](https://github.com/tpluscode)
