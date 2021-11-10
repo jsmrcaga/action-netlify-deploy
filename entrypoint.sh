@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 npm i -g netlify-cli
 
 NETLIFY_AUTH_TOKEN=$1
