@@ -10,7 +10,7 @@ NETLIFY_CLI=$(which netlify)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
-nvm install
+nvm install "$9"
 
 NETLIFY_AUTH_TOKEN=$1
 NETLIFY_SITE_ID=$2
