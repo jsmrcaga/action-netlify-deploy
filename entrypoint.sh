@@ -2,7 +2,17 @@
 
 set -e
 
+# Install netlify globally before NVM to prevent EACCESS issues
 npm i -g netlify-cli
+
+# Save its exec path to run later
+NETLIFY_CLI=$(which netlify)
+
+# Install node from NVM to honor .nvmrc files
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+
+nvm install "$9"
 
 NETLIFY_AUTH_TOKEN=$1
 NETLIFY_SITE_ID=$2
@@ -31,7 +41,7 @@ eval ${BUILD_COMMAND:-"npm run build"}
 export NETLIFY_SITE_ID=$NETLIFY_SITE_ID
 export NETLIFY_AUTH_TOKEN=$NETLIFY_AUTH_TOKEN
 
-COMMAND="netlify deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
+COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
 
 if [[ $NETLIFY_DEPLOY_TO_PROD == "true" ]]
 then

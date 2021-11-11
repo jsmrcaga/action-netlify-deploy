@@ -41,6 +41,7 @@ The inputs this action uses are:
 | `install_command` | `false` | Auto-detected | The (optional) command to install dependencies. Runs `yarn` when `yarn.lock` is found; `npm i` otherwise |
 | `build_command` | `false` | `npm run build` | The (optional) command to build static website |
 | `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
+| `node_version` | `false` | '' | (Optional) Node version or other arguments passed to [nvm install](https://github.com/nvm-sh/nvm#usage) |
 
 ## Example
 
@@ -134,3 +135,15 @@ jobs:
           state: success
           target_url: https://${{ env.BRANCH_NAME }}--my-site.netlify.app
 ```
+
+### Selecting node version
+
+By default, the latest node will be installed before building the application.
+
+Use the `node_version` input to change the desired version. It will be passed to [`nvm install`](https://github.com/nvm-sh/nvm#usage). Valid examples include `16.3.0`, `14`, or `--lts`.
+
+Alternatively, create an `.nvmrc` file with the desired version range in your repository.
+
+## Contributors
+
+- [tpluscode](https://github.com/tpluscode)
