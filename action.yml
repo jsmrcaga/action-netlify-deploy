@@ -56,12 +56,12 @@ inputs:
 outputs:
   NETLIFY_OUTPUT:
     description: "netlify command output"
-  NETLIFY_URL:
-    description: "deployment URL"
+  NETLIFY_PREVIEW_URL:
+    description: "deployment preview URL"
   NETLIFY_LOGS_URL:
     description: "deployment preview logs url"
   NETLIFY_LIVE_URL:
-    description: "deployment preview URL"
+    description: "deployment URL"
 
 runs:
   using: 'docker'
