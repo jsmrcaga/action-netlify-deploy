@@ -43,6 +43,28 @@ The inputs this action uses are:
 | `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
 | `node_version` | `false` | '' | (Optional) Node version or other arguments passed to [nvm install](https://github.com/nvm-sh/nvm#usage) |
 
+
+### Outputs
+
+The outputs for this action are:
+
+`NETLIFY_OUTPUT`
+
+Full output of the action
+
+`NETLIFY_PREVIEW_URL`
+
+The url of deployment preview.
+
+`NETLIFY_LOGS_URL`
+
+The url of the logs.
+
+`NETLIFY_LIVE_URL`
+
+The url of the live deployed site.
+
+
 ## Example
 
 ### Deploy to production on release
@@ -147,3 +169,4 @@ Alternatively, create an `.nvmrc` file with the desired version range in your re
 ## Contributors
 
 - [tpluscode](https://github.com/tpluscode)
+- [wallies](https://github.com/wallies)
