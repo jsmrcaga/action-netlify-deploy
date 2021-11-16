@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Install netlify globally before NVM to prevent EACCESS issues
 npm i -g netlify-cli
 
