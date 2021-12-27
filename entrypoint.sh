@@ -9,10 +9,18 @@ npm i -g netlify-cli
 NETLIFY_CLI=$(which netlify)
 
 # Install node from NVM to honor .nvmrc files
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+if [[ -n $9 ]] || [[ -e ".nvmrc" ]]
+then
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+	[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
-nvm install "$9"
+	if [[ -n $9 ]]
+	then
+		nvm install "$9"
+	else
+		nvm install
+	fi
+fi
 
 NETLIFY_AUTH_TOKEN=$1
 NETLIFY_SITE_ID=$2
