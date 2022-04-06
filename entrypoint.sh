@@ -42,12 +42,12 @@ else
 	npm i
 fi
 
-# Build project
-eval ${BUILD_COMMAND:-"npm run build"}
-
 # Export token to use with netlify's cli
 export NETLIFY_SITE_ID="$NETLIFY_SITE_ID"
 export NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN"
+
+# Build project
+eval ${BUILD_COMMAND:-"npm run build"}
 
 COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
 
