@@ -23,33 +23,8 @@ inputs:
     required: false
     default: ''
 
-  build_directory:
-    description: 'Directory where built files are stored'
-    required: true
-    default: 'build'
-
-  functions_directory:
-    description: 'Directory where built files are stored'
-    required: false
-    default: ''
-
-  install_command:
-    description: 'Command to install dependencies'
-    required: false
-    default: ''
-
-  build_command:
-    description: 'Command to build static website'
-    required: false
-    default: 'npm run build'
-
   deploy_alias:
     description: 'Deployment Subdomain name'
-    required: false
-    default: ''
-
-  node_version:
-    description: 'Node version or arguments compatible with `nvm install`'
     required: false
     default: ''
 
@@ -70,12 +45,7 @@ runs:
     - ${{ inputs.NETLIFY_AUTH_TOKEN }}
     - ${{ inputs.NETLIFY_SITE_ID }}
     - ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
-    - ${{ inputs.build_directory }}
-    - ${{ inputs.functions_directory }}
-    - ${{ inputs.install_command }}
-    - ${{ inputs.build_command }}
     - ${{ inputs.deploy_alias }}
-    - ${{ inputs.node_version }}
 
 branding:
   icon: activity

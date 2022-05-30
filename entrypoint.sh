@@ -8,48 +8,16 @@ npm i -g netlify-cli
 # Save its exec path to run later
 NETLIFY_CLI=$(which netlify)
 
-# Install node from NVM to honor .nvmrc files
-if [[ -n $9 ]] || [[ -e ".nvmrc" ]]
-then
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-	[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-
-	if [[ -n $9 ]]
-	then
-		nvm install "$9"
-	else
-		nvm install
-	fi
-fi
-
 NETLIFY_AUTH_TOKEN=$1
 NETLIFY_SITE_ID=$2
 NETLIFY_DEPLOY_TO_PROD=$3
-BUILD_DIRECTORY=$4
-FUNCTIONS_DIRECTORY=$5
-INSTALL_COMMAND=$6
-BUILD_COMMAND=$7
-DEPLOY_ALIAS=$8
-
-# Install dependencies
-if [[ -n $INSTALL_COMMAND ]]
-then
-	eval $INSTALL_COMMAND
-elif [[ -f yarn.lock ]]
-then
-	yarn
-else
-	npm i
-fi
-
-# Build project
-eval ${BUILD_COMMAND:-"npm run build"}
+DEPLOY_ALIAS=$4
 
 # Export token to use with netlify's cli
 export NETLIFY_SITE_ID="$NETLIFY_SITE_ID"
 export NETLIFY_AUTH_TOKEN="$NETLIFY_AUTH_TOKEN"
 
-COMMAND="$NETLIFY_CLI deploy --dir=$BUILD_DIRECTORY --functions=$FUNCTIONS_DIRECTORY --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
+COMMAND="$NETLIFY_CLI deploy --message=\"$INPUT_NETLIFY_DEPLOY_MESSAGE\""
 
 if [[ $NETLIFY_DEPLOY_TO_PROD == "true" ]]
 then
