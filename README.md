@@ -2,12 +2,18 @@
 
 This is a simple GitHub Action to deploy a static website to Netlify.
 
-Forked from [jsmrcaga/action-netlify-deploy](https://github.com/jsmrcaga/action-netlify-deploy) with the following features removed:
+Forked from [jsmrcaga/action-netlify-deploy](https://github.com/jsmrcaga/action-netlify-deploy) with:
+
+Remove features for simplicity and speed:
 
 - no nvm install
 - no install step
 - no build step
 - don't specify functions and build dir when calling `netlify deploy`
+
+Added features:
+
+- working-directory option, allowing for a .toml file in a monorepo.
 
 ## Usage
 
@@ -44,6 +50,7 @@ The inputs this action uses are:
 | `NETLIFY_SITE_ID` | `true` | N/A | The site to where deploy your site (get it from the API ID on your Site Settings) |
 | `NETLIFY_DEPLOY_MESSAGE` | `false` | '' | An optional deploy message |
 | `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
+| `working-directory` | `false` | '' | (Optional) Working directory |
 
 
 ### Outputs
