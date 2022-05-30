@@ -28,6 +28,11 @@ inputs:
     required: false
     default: ''
 
+  working-directory:
+    description: 'Working directory'
+    required: false
+    default: ''
+
 outputs:
   NETLIFY_OUTPUT:
     description: "netlify command output"
@@ -46,6 +51,7 @@ runs:
     - ${{ inputs.NETLIFY_SITE_ID }}
     - ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
     - ${{ inputs.deploy_alias }}
+    - ${{ inputs.working-directory }}
 
 branding:
   icon: activity
