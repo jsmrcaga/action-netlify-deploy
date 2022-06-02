@@ -53,6 +53,11 @@ inputs:
     required: false
     default: ''
 
+  use_nvm:
+    description: 'Enables you to disable nvm altogether'
+    required: false
+    default: true
+
 outputs:
   NETLIFY_OUTPUT:
     description: "netlify command output"

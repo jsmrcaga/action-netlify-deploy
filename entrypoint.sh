@@ -8,15 +8,21 @@ npm i -g netlify-cli
 # Save its exec path to run later
 NETLIFY_CLI=$(which netlify)
 
+NODE_VERSION=$9
+
+# We can start using INPUT_ notation instead of passing
+# env variables as arg to docker
+USE_NVM=$INPUT_USE_NVM
+
 # Install node from NVM to honor .nvmrc files
-if [[ -n $9 ]] || [[ -e ".nvmrc" ]]
+if [[ $USE_NVM == "true" ]] && ([[ -n $NODE_VERSION ]] || [[ -e ".nvmrc" ]])
 then
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 	[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
-	if [[ -n $9 ]]
+	if [[ -n $NODE_VERSION ]]
 	then
-		nvm install "$9"
+		nvm install "$NODE_VERSION"
 	else
 		nvm install
 	fi
