@@ -2,9 +2,6 @@
 
 set -e
 
-# Install netlify globally before NVM to prevent EACCESS issues
-npm i -g netlify-cli
-
 # Save its exec path to run later
 NETLIFY_CLI=$(which netlify)
 
@@ -17,9 +14,6 @@ USE_NVM=$INPUT_USE_NVM
 # Install node from NVM to honor .nvmrc files
 if [[ $USE_NVM == "true" ]] && ([[ -n $NODE_VERSION ]] || [[ -e ".nvmrc" ]])
 then
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-	[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-
 	if [[ -n $NODE_VERSION ]]
 	then
 		nvm install "$NODE_VERSION"
