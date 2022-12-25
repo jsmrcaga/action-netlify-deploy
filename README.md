@@ -42,6 +42,7 @@ The inputs this action uses are:
 | `build_command` | `false` | `npm run build` | The (optional) command to build static website |
 | `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
 | `node_version` | `false` | '' | (Optional) Node version or other arguments passed to [nvm install](https://github.com/nvm-sh/nvm#usage) |
+| `use_nvm` | `false` | 'true' | (Optional) Enables you to disable nvm altogether |
 
 
 ### Outputs
@@ -166,7 +167,25 @@ Use the `node_version` input to change the desired version. It will be passed to
 
 Alternatively, create an `.nvmrc` file with the desired version range in your repository.
 
+### Deploy to Netlify only
+
+In case of already having the deployment ready data - we can easily skip the nvm, install and build part via passing:
+
+```
+- name: Deploy to Netlify
+  uses: jsmrcaga/action-netlify-deploy@master
+  with:
+    NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
+    NETLIFY_DEPLOY_TO_PROD: true
+    use_nvm: false
+    install_command: "echo Skipping installing the dependencies"
+    build_command: "echo Skipping building the web files"
+```
+
 ## Contributors
 
 - [tpluscode](https://github.com/tpluscode)
 - [wallies](https://github.com/wallies)
+- [crisperit](https://github.com/crisperit)
