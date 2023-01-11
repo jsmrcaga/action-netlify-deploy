@@ -39,14 +39,6 @@ inputs:
     description: Deployment Subdomain name
     required: false
     default: ""
-  node_version:
-    description: Node version or arguments compatible with `nvm install`
-    required: false
-    default: ""
-  use_nvm:
-    description: Enables you to disable nvm altogether
-    required: false
-    default: true
 outputs:
   NETLIFY_OUTPUT:
     description: netlify command output
@@ -59,82 +51,20 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: "Install node through NVM if needed"
-      shell: bash
-      run: |
-        if [[ "${{ inputs.use_nvm }}" == "true" ]] && ([[ -n "${{ inputs.node_version }}" ]] || [[ -e ".nvmrc" ]])
-        then
-        	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
-        	[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
-        	if [[ -n "${{ inputs.node_version }}" ]]
-        	then
-        		nvm install "${{ inputs.node_version }}"
-        	else
-        		nvm install
-        	fi
-        else
-          echo "Node installation has been omitted"
-        fi
-    - name: "Run install command"
-      shell: bash
-      run: |
-        if [[ -n "${{ inputs.install_command }}" ]]
-        then
-          ${{ inputs.install_command }}
-        elif [[ -f yarn.lock ]]
-        then
-          yarn
-        else
-          npm i
-        fi
-    - name: "Run build command"
-      shell: bash
-      run: |
-        if [[ -n "${{ inputs.build_command }}" ]]
-        then
-          ${{ inputs.build_command }}
-        else
-          npm run build
-        fi
-    - name: "Deploy to Netlify"
-      shell: bash
-      run: |
-        export NETLIFY_SITE_ID="${{ inputs.NETLIFY_SITE_ID }}"
-        export NETLIFY_AUTH_TOKEN="${{ inputs.NETLIFY_AUTH_TOKEN }}"
+      - run: ${{ github.action_path }}/entrypoint.sh
+        shell: bash
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ inputs.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
+          NETLIFY_DEPLOY_MESSAGE: ${{ inputs.NETLIFY_DEPLOY_MESSAGE }}
+          BUILD_DIRECTORY: ${{ inputs.build_directory }}
+          FUNCTIONS_DIRECTORY: ${{ inputs.functions_directory }}
+          INSTALL_COMMAND: ${{ inputs.install_command }}
+          BUILD_COMMAND: ${{ inputs.build_command }}
+          DEPLOY_ALIAS: ${{ inputs.deploy_alias }}
 
-        COMMAND="netlify deploy --dir=${{ inputs.build_directory }} --functions=${{ inputs.functions_directory }} --message=\"${{ inputs.NETLIFY_DEPLOY_MESSAGE }}\""
-
-        if [[ "${{ inputs.NETLIFY_DEPLOY_TO_PROD }}" == "true" ]]
-        then
-          COMMAND+=" --prod"
-        elif [[ -n "${{ inputs.deploy_alias }}" ]]
-        then
-          COMMAND+=" --alias ${{ inputs.deploy_alias }}"
-        fi
-
-        # Deploy with netlify
-        OUTPUT=$(sh -c "$COMMAND")
-
-        NETLIFY_OUTPUT=$(echo "$OUTPUT")
-        NETLIFY_PREVIEW_URL=$(echo "$OUTPUT" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_-]*(--)[a-zA-Z0-9./?=_-]*') #Unique key: --
-        NETLIFY_LOGS_URL=$(echo "$OUTPUT" | grep -Eo '(http|https)://app.netlify.com/[a-zA-Z0-9./?=_-]*') #Unique key: app.netlify.com
-        NETLIFY_LIVE_URL=$(echo "$OUTPUT" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_-]*' | grep -Eov "netlify.com") #Unique key: don't containr -- and app.netlify.com
-
-        echo "NETLIFY_OUTPUT<<EOF" >> $GITHUB_ENV
-        echo "$NETLIFY_OUTPUT" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
-
-        echo "NETLIFY_PREVIEW_URL<<EOF" >> $GITHUB_ENV
-        echo "$NETLIFY_PREVIEW_URL" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
-
-        echo "NETLIFY_LOGS_URL<<EOF" >> $GITHUB_ENV
-        echo "$NETLIFY_LOGS_URL" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
-
-        echo "NETLIFY_LIVE_URL<<EOF" >> $GITHUB_ENV
-        echo "$NETLIFY_LIVE_URL" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
+      
 branding:
   icon: activity
   color: blue
