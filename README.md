@@ -41,8 +41,6 @@ The inputs this action uses are:
 | `install_command` | `false` | Auto-detected | The (optional) command to install dependencies. Runs `yarn` when `yarn.lock` is found; `npm i` otherwise |
 | `build_command` | `false` | `npm run build` | The (optional) command to build static website |
 | `deploy_alias` | `false` | '' | (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy) |
-| `node_version` | `false` | '' | (Optional) Node version or other arguments passed to [nvm install](https://github.com/nvm-sh/nvm#usage) |
-| `use_nvm` | `false` | 'true' | (Optional) Enables you to disable nvm altogether |
 
 
 ### Outputs
@@ -179,7 +177,6 @@ In case of already having the deployment ready data - we can easily skip the nvm
     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
     NETLIFY_DEPLOY_MESSAGE: "Deployed from GitHub action"
     NETLIFY_DEPLOY_TO_PROD: true
-    use_nvm: false
     install_command: "echo Skipping installing the dependencies"
     build_command: "echo Skipping building the web files"
 ```
