@@ -36,6 +36,7 @@ The inputs this action uses are:
 | `NETLIFY_AUTH_TOKEN` | `true` | N/A | The token needed to deploy your site ([generate here](https://app.netlify.com/user/applications#personal-access-tokens))|
 | `NETLIFY_SITE_ID` | `true` | N/A | The site to where deploy your site (get it from the API ID on your Site Settings) |
 | `NETLIFY_DEPLOY_MESSAGE` | `false` | '' | An optional deploy message |
+| `NETLIFY_DEPLOY_TO_PROD` | `false` | `false` | Should the site be deployed to production? |
 | `build_directory` | `false` | `'build'` | The directory where your files are built |
 | `functions_directory` | `false` | N/A | The (optional) directory where your Netlify functions are stored |
 | `install_command` | `false` | Auto-detected | The (optional) command to install dependencies. Runs `yarn` when `yarn.lock` is found; `npm i` otherwise |
