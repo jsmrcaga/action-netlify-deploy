@@ -155,7 +155,7 @@ jobs:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           context: Netlify preview
           state: success
-          target_url: https://${{ env.BRANCH_NAME }}--my-site.netlify.app
+          target_url: ${{ env.NETLIFY_PREVIEW_URL }}
 ```
 
 ### Selecting node version
