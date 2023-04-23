@@ -6,11 +6,8 @@ set -e
 if [[ -n "${INSTALL_COMMAND}" ]]
 then
   ${INSTALL_COMMAND}
-elif [[ -f yarn.lock ]]
-then
-  yarn
 else
-  npm i
+
 fi
 
 # Run build command
@@ -18,7 +15,7 @@ if [[ -n "${BUILD_COMMAND}" ]]
 then
   ${BUILD_COMMAND}
 else
-  npm run build
+
 fi
 
 # Deploy to Netlify
