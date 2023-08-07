@@ -42,17 +42,22 @@ inputs:
 outputs:
   NETLIFY_OUTPUT:
     description: netlify command output
+    value: ${{ steps.deployment.outputs.NETLIFY_OUTPUT }}
   NETLIFY_PREVIEW_URL:
     description: deployment preview URL
+    value: ${{ steps.deployment.outputs.NETLIFY_PREVIEW_URL }}
   NETLIFY_LOGS_URL:
     description: deployment preview logs url
+    value: ${{ steps.deployment.outputs.NETLIFY_LOGS_URL }}
   NETLIFY_LIVE_URL:
     description: deployment URL
+    value: ${{ steps.deployment.outputs.NETLIFY_LIVE_URL }}
 runs:
   using: composite
   steps:
       - run: ${{ github.action_path }}/entrypoint.sh
         shell: bash
+        id: deployment
         env:
           NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ inputs.NETLIFY_SITE_ID }}
