@@ -39,6 +39,10 @@ inputs:
     description: Deployment Subdomain name
     required: false
     default: ""
+  monorepo_package:
+    description: In monorepos, package to deploy
+    required: false
+    default: ""
 outputs:
   NETLIFY_OUTPUT:
     description: netlify command output
@@ -63,8 +67,8 @@ runs:
           INSTALL_COMMAND: ${{ inputs.install_command }}
           BUILD_COMMAND: ${{ inputs.build_command }}
           DEPLOY_ALIAS: ${{ inputs.deploy_alias }}
+          MONOREPO_PACKAGE: ${{ inputs.monorepo_package }}
 
-      
 branding:
   icon: activity
   color: blue

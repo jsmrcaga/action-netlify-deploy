@@ -35,6 +35,11 @@ then
   COMMAND+=" --alias ${DEPLOY_ALIAS}"
 fi
 
+if [[ -n "${MONOREPO_PACKAGE}" ]]
+then
+  COMMAND+=" --filter ${MONOREPO_PACKAGE}"
+fi
+
 OUTPUT=$(sh -c "$COMMAND")
 
 # Set outputs
