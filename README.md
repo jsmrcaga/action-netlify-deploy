@@ -43,6 +43,8 @@ The inputs this action uses are:
 |     `build_command`      | `false`  | `npm run build` |                                      The (optional) command to build static website                                      |
 |      `deploy_alias`      | `false`  |       ''        |                        (Optional) [Deployed site alias](https://cli.netlify.com/commands/deploy)                         |
 |    `monorepo_package`    | `false`  |       ''        |                               (Optional) For monorepos. The name of the package to deploy                                |
+|    `debug`               | `false`  |       ''        |                               (Optional) When provided non-empty, prints more debug info in NETLIFY_OUTPUT               |
+|  `command_extra_flags`   | `false`  |       ''        |                               (Optional) Any optional extra flags added to Netlify deploy command                        |
 
 
 ### Outputs
@@ -180,3 +182,4 @@ In case of already having the deployment ready data - we can easily skip the nvm
 - [tpluscode](https://github.com/tpluscode)
 - [wallies](https://github.com/wallies)
 - [crisperit](https://github.com/crisperit)
+- [mkukawski](https://github.com/mkukawski)
