@@ -19,6 +19,10 @@ inputs:
     description: A deploy message
     required: false
     default: ""
+  debug:
+    description: When provided, prints more debug info in NETLIFY_OUTPUT
+    required: false
+    default: ""
   build_directory:
     description: Directory where built files are stored
     required: true
@@ -41,6 +45,10 @@ inputs:
     default: ""
   monorepo_package:
     description: In monorepos, package to deploy
+    required: false
+    default: ""
+  command_extra_flags:
+    description: Any optional extra flags added to Netlify deploy command
     required: false
     default: ""
 outputs:
@@ -68,6 +76,8 @@ runs:
           BUILD_COMMAND: ${{ inputs.build_command }}
           DEPLOY_ALIAS: ${{ inputs.deploy_alias }}
           MONOREPO_PACKAGE: ${{ inputs.monorepo_package }}
+          DEBUG: ${{ inputs.debug }}
+          COMMAND_EXTRA_FLAGS: ${{ inputs.command_extra_flags }}
 
 branding:
   icon: activity
