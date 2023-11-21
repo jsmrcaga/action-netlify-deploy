@@ -25,6 +25,7 @@ fi
 export NETLIFY_SITE_ID="${NETLIFY_SITE_ID}"
 export NETLIFY_AUTH_TOKEN="${NETLIFY_AUTH_TOKEN}"
 
+# command based on https://cli.netlify.com/commands/deploy
 COMMAND="netlify deploy --dir=${BUILD_DIRECTORY} --functions=${FUNCTIONS_DIRECTORY} --message=\"${NETLIFY_DEPLOY_MESSAGE}\""
 
 if [[ "${NETLIFY_DEPLOY_TO_PROD}" == "true" ]]
@@ -38,6 +39,16 @@ fi
 if [[ -n "${MONOREPO_PACKAGE}" ]]
 then
   COMMAND+=" --filter ${MONOREPO_PACKAGE}"
+fi
+
+if [[ -n "${DEBUG}" ]]
+then
+  COMMAND+=" --debug "
+fi
+
+if [[ -n "${COMMAND_EXTRA_FLAGS}" ]]
+then
+  COMMAND+=" ${COMMAND_EXTRA_FLAGS} "
 fi
 
 OUTPUT=$(sh -c "$COMMAND")
