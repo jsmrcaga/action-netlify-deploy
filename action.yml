@@ -35,6 +35,10 @@ inputs:
     description: Command to install dependencies
     required: false
     default: ""
+  netlify_path:
+    description: Path to netlify CLI binary
+    required: false
+    default: "netlify"
   build_command:
     description: Command to build static website
     required: false
@@ -78,6 +82,7 @@ runs:
           MONOREPO_PACKAGE: ${{ inputs.monorepo_package }}
           DEBUG: ${{ inputs.debug }}
           COMMAND_EXTRA_FLAGS: ${{ inputs.command_extra_flags }}
+          NETLIFY_PATH: ${{ inputs.netlify_path }}
 
 branding:
   icon: activity
