@@ -26,7 +26,7 @@ export NETLIFY_SITE_ID="${NETLIFY_SITE_ID}"
 export NETLIFY_AUTH_TOKEN="${NETLIFY_AUTH_TOKEN}"
 
 # command based on https://cli.netlify.com/commands/deploy
-COMMAND="netlify deploy --dir=${BUILD_DIRECTORY} --functions=${FUNCTIONS_DIRECTORY} --message=\"${NETLIFY_DEPLOY_MESSAGE}\""
+COMMAND="${NETLIFY_PATH} deploy --dir=${BUILD_DIRECTORY} --functions=${FUNCTIONS_DIRECTORY} --message=\"${NETLIFY_DEPLOY_MESSAGE}\""
 
 if [[ "${NETLIFY_DEPLOY_TO_PROD}" == "true" ]]
 then
