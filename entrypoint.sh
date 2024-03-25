@@ -25,7 +25,8 @@ fi
 export NETLIFY_SITE_ID="${NETLIFY_SITE_ID}"
 export NETLIFY_AUTH_TOKEN="${NETLIFY_AUTH_TOKEN}"
 
-COMMAND="netlify deploy --dir=${BUILD_DIRECTORY} --functions=${FUNCTIONS_DIRECTORY} --message=\"${NETLIFY_DEPLOY_MESSAGE}\""
+# command based on https://cli.netlify.com/commands/deploy
+COMMAND="${NETLIFY_PATH} deploy --dir=${BUILD_DIRECTORY} --functions=${FUNCTIONS_DIRECTORY} --message=\"${NETLIFY_DEPLOY_MESSAGE}\""
 
 if [[ "${NETLIFY_DEPLOY_TO_PROD}" == "true" ]]
 then
@@ -38,6 +39,16 @@ fi
 if [[ -n "${MONOREPO_PACKAGE}" ]]
 then
   COMMAND+=" --filter ${MONOREPO_PACKAGE}"
+fi
+
+if [[ -n "${DEBUG}" ]]
+then
+  COMMAND+=" --debug "
+fi
+
+if [[ -n "${COMMAND_EXTRA_FLAGS}" ]]
+then
+  COMMAND+=" ${COMMAND_EXTRA_FLAGS} "
 fi
 
 OUTPUT=$(sh -c "$COMMAND")
@@ -62,4 +73,8 @@ echo "EOF" >> $GITHUB_ENV
 
 echo "NETLIFY_LIVE_URL<<EOF" >> $GITHUB_ENV
 echo "$NETLIFY_LIVE_URL" >> $GITHUB_ENV
+echo "EOF" >> $GITHUB_ENV
+
+echo "NETLIFY_COMMAND<<EOF" >> $GITHUB_ENV
+echo "$COMMAND" >> $GITHUB_ENV
 echo "EOF" >> $GITHUB_ENV
