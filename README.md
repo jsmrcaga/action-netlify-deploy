@@ -5,7 +5,7 @@ This is a simple GitHub Action to deploy a static website to Netlify.
 ## Usage
 
 To use a GitHub action you can just reference it on your Workflow file
-(for more info check [this article by Github](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow))
+(for more info check [this article by GitHub](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow))
 
 ```yml
 name: 'My Workflow'
@@ -57,15 +57,15 @@ Full output of the action
 
 `NETLIFY_PREVIEW_URL`
 
-The url of deployment preview.
+The URL of deployment preview.
 
 `NETLIFY_LOGS_URL`
 
-The url of the logs.
+The URL of the logs.
 
 `NETLIFY_LIVE_URL`
 
-The url of the live deployed site.
+The URL of the live deployed site.
 
 
 ## Example
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -165,7 +165,7 @@ jobs:
 
 In case of already having the deployment ready data - we can easily skip the nvm, install and build part via passing:
 
-```
+```yml
 - name: Deploy to Netlify
   uses: jsmrcaga/action-netlify-deploy@v2.0.0
   with:
