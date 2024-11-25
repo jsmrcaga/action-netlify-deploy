@@ -67,7 +67,7 @@ outputs:
 runs:
   using: composite
   steps:
-      - run: which ${{ inputs.netlify_path }} &> /dev/null || npm install netlify-cli -g
+      - run: which ${{ inputs.netlify_path }} &> /dev/null || npm install netlify-cli@17.36.1 -g
         shell: bash
       - run: ${{ github.action_path }}/entrypoint.sh
         shell: bash
